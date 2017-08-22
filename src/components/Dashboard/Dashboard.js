@@ -1,28 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import './Dashboard.scss'
+import List from './List'
 
-export const Dashboard = ({ dashboard, increment, doubleAsync }) => (
+export const Dashboard = ({ visitCount, dashboardItems }) => (
   <div>
     <h2 className='dashboardContainer'>
       Dashboard: {'  '}
       <span className='dashboard--green'>
-        {dashboard}
+        {visitCount}
       </span>
     </h2>
-    <button className='btn btn-primary' onClick={increment}>
-      Increment
-    </button>
-    {' '}
-    <button className='btn btn-secondary' onClick={doubleAsync}>
-      Double (Async)
-    </button>
+    <List dashboardItems={dashboardItems} />
   </div>
 )
 Dashboard.propTypes = {
-  dashboard: PropTypes.number.isRequired,
-  increment: PropTypes.func.isRequired,
-  doubleAsync: PropTypes.func.isRequired,
+  visitCount: PropTypes.number.isRequired,
 }
 
 export default Dashboard
