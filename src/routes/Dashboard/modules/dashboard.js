@@ -2,6 +2,7 @@
 // Constants
 // ------------------------------------
 export const COUNTER_INCREMENT = 'COUNTER_INCREMENT'
+export const DASHBOARD_ADD_ITEM = 'DASHBOARD_ADD_ITEM'
 //export const COUNTER_DOUBLE_ASYNC = 'COUNTER_DOUBLE_ASYNC'
 
 // ------------------------------------
@@ -10,6 +11,13 @@ export const COUNTER_INCREMENT = 'COUNTER_INCREMENT'
 export function dashboardVisitIncrement (value = 1) {
   return {
     type    : COUNTER_INCREMENT,
+    payload : value
+  }
+}
+
+export function dashboardAddItem(value) {
+  return {
+    type    : DASHBOARD_ADD_ITEM,
     payload : value
   }
 }
@@ -43,7 +51,19 @@ const ACTION_HANDLERS = {
   [COUNTER_INCREMENT]    : (state, action) => ({
     ...state,
     visitCount: state.visitCount + action.payload
-  })
+  }),
+  [DASHBOARD_ADD_ITEM]   : (state, action) => {
+    const mockedId = Math.floor(Date.now() / 1000)
+    const newItem = {
+      id: mockedId,
+      label: action.payload.label
+    }
+
+    return {
+      ...state,
+      dashboardItems: [...state.dashboardItems, newItem]
+    }
+  }
   // [COUNTER_DOUBLE_ASYNC] : (state, action) => state * 2
 }
 
