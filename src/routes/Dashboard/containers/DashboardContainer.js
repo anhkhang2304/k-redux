@@ -1,5 +1,9 @@
 import { connect } from 'react-redux'
-import { dashboardVisitIncrement, dashboardAddItem } from '../modules/dashboard'
+import {
+  dashboardVisitIncrement,
+  dashboardAddItem,
+  dashboardEditItem
+} from '../modules/dashboard'
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
@@ -14,7 +18,8 @@ import DashboardRoute from '../components/Dashboard'
 
 const mapDispatchToProps = {
   dashboardVisitIncrement : () => dashboardVisitIncrement(1),
-  dashboardAddItem
+  dashboardAddItem,
+  dashboardEditItem
 }
 
 const mapStateToProps = (state) => ({

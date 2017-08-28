@@ -3,6 +3,7 @@
 // ------------------------------------
 export const COUNTER_INCREMENT = 'COUNTER_INCREMENT'
 export const DASHBOARD_ADD_ITEM = 'DASHBOARD_ADD_ITEM'
+export const DASHBOARD_EDIT_ITEM = 'DASHBOARD_EDIT_ITEM'
 //export const COUNTER_DOUBLE_ASYNC = 'COUNTER_DOUBLE_ASYNC'
 
 // ------------------------------------
@@ -18,6 +19,13 @@ export function dashboardVisitIncrement (value = 1) {
 export function dashboardAddItem(value) {
   return {
     type    : DASHBOARD_ADD_ITEM,
+    payload : value
+  }
+}
+
+export function dashboardEditItem(value) {
+  return {
+    type    : DASHBOARD_EDIT_ITEM,
     payload : value
   }
 }
@@ -62,6 +70,21 @@ const ACTION_HANDLERS = {
     return {
       ...state,
       dashboardItems: [...state.dashboardItems, newItem]
+    }
+  },
+  [DASHBOARD_EDIT_ITEM]   : (state, action) => {
+    const { label, editItemIndex: index } = action.payload
+    let newItem = {
+      ...state.dashboardItems[index],
+      label
+    }
+
+    const immutableDashboardItems = [
+      ...state.dashboardItems.slice(0, index), newItem,
+      ...state.dashboardItems.slice(index + 1)
+    ]
+    return {
+      ...state, dashboardItems: immutableDashboardItems
     }
   }
   // [COUNTER_DOUBLE_ASYNC] : (state, action) => state * 2
