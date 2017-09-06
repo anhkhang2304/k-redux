@@ -6,7 +6,8 @@ class DashboardRoute extends React.Component {
     dashboardVisitIncrement: PropTypes.func.isRequired,
     dashboard: PropTypes.object.isRequired,
     dashboardAddItem: PropTypes.func.isRequired,
-    dashboardEditItem: PropTypes.func.isRequired
+    dashboardEditItem: PropTypes.func.isRequired,
+    session: PropTypes.object.isRequired
   }
 
   componentDidMount(){
@@ -19,6 +20,9 @@ class DashboardRoute extends React.Component {
   )
 
   render() {
+    if (!this.props.session.isLoggedIn){
+      return <h4> Đăng nhập đi mày! </h4>
+    }
     return (
       <Dashboard
         dashboardItems={this.props.dashboard.dashboardItems}
